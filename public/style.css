@@ -177,6 +177,7 @@
   }
   
   .post .usuario, .post .topo img, .post .fundo img, .post ion-icon, .post strong {
+    visibility: inherit;
     cursor: pointer;
   }
   
@@ -193,6 +194,10 @@
   
   .post .fundo .acoes div:first-child ion-icon {
     margin-right: 6px;
+  }
+  
+  .red {
+    color: red;
   }
   
   .post .fundo .curtidas {
@@ -345,6 +350,7 @@
       background-color: transparent;
       border: none;
       width: 100%;
+      margin-top: 50px;
     }
   
     .post:first-child {

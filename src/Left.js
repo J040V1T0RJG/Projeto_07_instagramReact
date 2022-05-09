@@ -1,3 +1,5 @@
+import React from 'react';
+
 const storyDados = [
     {
         image: "mediafiles/instagram/assets/img/9gag.svg",
@@ -67,42 +69,78 @@ function Story (props) {
 }
 
 function Post (props) {
+    
+    let contador = 0;
+    const ionicon = "";
+    const ioniconRed = "red";
+    const coracaoVazio = "heart-outline"
+    const coracaoCheio = "heart"
+    const [curtida, setCurtida] = React.useState(false);
+    const [classe, setClasse] = React.useState(ionicon);
+    const [coracao, setCoracao] = React.useState(coracaoVazio)
+
+    function curtidaFoto() {
+        console.log("curtidaFoto")
+        if(curtida == false) {
+            contador++;
+            if(contador == 2) {
+                setCurtida(true);
+                setClasse(ioniconRed)
+                setCoracao(coracaoCheio)
+            }
+        }  
+    }
+
+    function curtidaIcone() {
+        console.log("curtidaIcone")
+        if(curtida == true) {
+            setCurtida(false)
+            setClasse(ionicon)
+            setCoracao(coracaoVazio)
+        }
+        else {
+            setCurtida(true)
+            setClasse(ioniconRed)
+            setCoracao(coracaoCheio)
+        }
+    }
+
     return (
         <div class="post">
-        <div class="topo">
-          <div class="usuario">
-            <img src={props.imageUserPost} />
-            {props.nameUserPost}
-          </div>
-          <div class="acoes">
-            <ion-icon name="ellipsis-horizontal"></ion-icon>
-          </div>
-        </div>
-
-        <div class="conteudo">
-          <img src={props.imagePost} />
-        </div>
-
-        <div class="fundo">
-          <div class="acoes">
-            <div>
-              <ion-icon name="heart-outline"></ion-icon>
-              <ion-icon name="chatbubble-outline"></ion-icon>
-              <ion-icon name="paper-plane-outline"></ion-icon>
+            <div class="topo">
+            <div class="usuario">
+                <img src={props.imageUserPost} />
+                {props.nameUserPost}
             </div>
-            <div>
-              <ion-icon name="bookmark-outline"></ion-icon>
+            <div class="acoes">
+                <ion-icon name="ellipsis-horizontal"></ion-icon>
             </div>
-          </div>
+            </div>
 
-          <div class="curtidas">
-            <img src={props.likeUserImage} />
-            <div class="texto">
-              Curtido por <strong>{props.likeUser}</strong> e <strong>outras {props.totalPeopleLike} pessoas</strong>
+            <div class="conteudo" onClick={() => curtidaFoto()}>
+            <img src={props.imagePost} />
             </div>
-          </div>
+
+            <div class="fundo">
+            <div class="acoes">
+                <div>
+                <ion-icon class={classe} name={coracao} onClick={() => curtidaIcone()}></ion-icon>
+                <ion-icon name="chatbubble-outline"></ion-icon>
+                <ion-icon name="paper-plane-outline"></ion-icon>
+                </div>
+                <div>
+                <ion-icon name="bookmark-outline"></ion-icon>
+                </div>
+            </div>
+
+            <div class="curtidas">
+                <img src={props.likeUserImage} />
+                <div class="texto">
+                Curtido por <strong>{props.likeUser}</strong> e <strong>outras {props.totalPeopleLike} pessoas</strong>
+                </div>
+            </div>
+            </div>
         </div>
-      </div>
     )
 }
 
